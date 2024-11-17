@@ -2,7 +2,7 @@ import createHttpError from "http-errors";
 import { SessionsCollection } from "./../db/models/session.js";
 import { UsersCollection } from "./../db/models/user.js";
 
-export const authenticate = (req, res, next) => {
+export const authenticate = async (req, res, next) => {
 	const authHeader = req.get("Authorization");
 
 	if (!authHeader) {
@@ -18,7 +18,7 @@ export const authenticate = (req, res, next) => {
 		return;
 	}
 
-	const session = SessionsCollection.findOne({ accessToken: token });
+	const session = await SessionsCollection.findOne({ accessToken: token });
 
 	if (!session) {
 		next(createHttpError(401, "No session found"));
@@ -32,7 +32,7 @@ export const authenticate = (req, res, next) => {
 		return;
 	}
 
-	const user = UsersCollection.findById(session.userId);
+	const user = await UsersCollection.findById(session.userId);
 
 	if (!user) {
 		next(createHttpError(401, "No user found"));
