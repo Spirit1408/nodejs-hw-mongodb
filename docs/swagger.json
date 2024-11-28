@@ -19,6 +19,10 @@
   ],
   "tags": [
     {
+      "name": "Main",
+      "description": "Main endpoint"
+    },
+    {
       "name": "Auth",
       "description": "Authentication endpoints"
     },
@@ -28,6 +32,49 @@
     }
   ],
   "paths": {
+    "/": {
+      "get": {
+        "tags": [
+          "Main"
+        ],
+        "security": [],
+        "summary": "Check server status",
+        "operationId": "getServerStatus",
+        "description": "Check server status and accessibility",
+        "responses": {
+          "200": {
+            "description": "Server is running",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Server is running"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
     "/contacts": {
       "get": {
         "tags": [
@@ -917,90 +964,6 @@
         "scheme": "bearer"
       }
     },
-    "schemas": {
-      "contact": {
-        "type": "object",
-        "required": [
-          "name",
-          "phoneNumber",
-          "contactType",
-          "userId"
-        ],
-        "properties": {
-          "_id": {
-            "description": "Contact's unique ID",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
-          "name": {
-            "description": "Contact's name",
-            "type": "string",
-            "example": "John Doe"
-          },
-          "phoneNumber": {
-            "description": "Contact's phone number",
-            "type": "string",
-            "example": "+1 (555) 123-4567"
-          },
-          "email": {
-            "description": "Contact's email address",
-            "type": "string",
-            "example": "johndoe@example.com"
-          },
-          "isFavourite": {
-            "description": "Whether the contact is marked as favourite",
-            "type": "boolean",
-            "example": false
-          },
-          "contactType": {
-            "description": "Type of the contact (personal, work, home)",
-            "type": "string",
-            "enum": [
-              "personal",
-              "work",
-              "home"
-            ],
-            "example": "personal"
-          },
-          "userId": {
-            "description": "User ID associated with the contact",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
-          },
-          "photo": {
-            "description": "URL to the contact's photo",
-            "type": "string",
-            "example": "https://example.com/contact-photo.png"
-          }
-        }
-      },
-      "user": {
-        "type": "object",
-        "required": [
-          "name",
-          "email",
-          "password"
-        ],
-        "properties": {
-          "email": {
-            "description": "User email",
-            "type": "string",
-            "format": "email",
-            "example": "user@example.com"
-          },
-          "name": {
-            "description": "User name",
-            "type": "string",
-            "example": "john_doe"
-          },
-          "password": {
-            "description": "User password",
-            "type": "string",
-            "format": "password\""
-          }
-        }
-      }
-    },
     "responses": {
       "400": {
         "description": "Bad request",
@@ -1132,6 +1095,90 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "contact": {
+        "type": "object",
+        "required": [
+          "name",
+          "phoneNumber",
+          "contactType",
+          "userId"
+        ],
+        "properties": {
+          "_id": {
+            "description": "Contact's unique ID",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "name": {
+            "description": "Contact's name",
+            "type": "string",
+            "example": "John Doe"
+          },
+          "phoneNumber": {
+            "description": "Contact's phone number",
+            "type": "string",
+            "example": "+1 (555) 123-4567"
+          },
+          "email": {
+            "description": "Contact's email address",
+            "type": "string",
+            "example": "johndoe@example.com"
+          },
+          "isFavourite": {
+            "description": "Whether the contact is marked as favourite",
+            "type": "boolean",
+            "example": false
+          },
+          "contactType": {
+            "description": "Type of the contact (personal, work, home)",
+            "type": "string",
+            "enum": [
+              "personal",
+              "work",
+              "home"
+            ],
+            "example": "personal"
+          },
+          "userId": {
+            "description": "User ID associated with the contact",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
+          },
+          "photo": {
+            "description": "URL to the contact's photo",
+            "type": "string",
+            "example": "https://example.com/contact-photo.png"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "description": "User email",
+            "type": "string",
+            "format": "email",
+            "example": "user@example.com"
+          },
+          "name": {
+            "description": "User name",
+            "type": "string",
+            "example": "john_doe"
+          },
+          "password": {
+            "description": "User password",
+            "type": "string",
+            "format": "password\""
           }
         }
       }
