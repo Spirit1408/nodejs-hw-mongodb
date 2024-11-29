@@ -16,7 +16,7 @@ tags:
     description: Contacts endpoints
 servers:
   - url: http://localhost:3000
-  - url: http://example.com
+  - url: https://homework-7.onrender.com/
 paths:
   /:
     get:

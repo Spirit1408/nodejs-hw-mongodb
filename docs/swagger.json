@@ -14,7 +14,7 @@
       "url": "http://localhost:3000"
     },
     {
-      "url": "http://example.com"
+      "url": "https://homework-7.onrender.com/"
     }
   ],
   "tags": [
@@ -253,8 +253,7 @@
                 "required": [
                   "name",
                   "phoneNumber",
-                  "contactType",
-                  "userId"
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
@@ -1105,8 +1104,7 @@
         "required": [
           "name",
           "phoneNumber",
-          "contactType",
-          "userId"
+          "contactType"
         ],
         "properties": {
           "_id": {
